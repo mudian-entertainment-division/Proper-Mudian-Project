@@ -33,8 +33,8 @@ public class Setting : MonoBehaviour
         }
         resolutionDropDown.AddOptions(options);
         resolutionDropDown.value = currentResolutionIndex;
-        resolutionDropDown.RefreshShownValue(); 
-
+        resolutionDropDown.RefreshShownValue();
+        SettingsOpen = false;
      }
     public void SetVolume(float volume)
     {
@@ -56,15 +56,5 @@ public class Setting : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
     // Update is called once per frame
-    void Update()
-    {
-        if(SettingsOpen)
-        {
-            Time.timeScale = 0;
-        }
-        else if (!SettingsOpen)
-        {
-            Time.timeScale = 1;
-        }
-    }
+    
 }

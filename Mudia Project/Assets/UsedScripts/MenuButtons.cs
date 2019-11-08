@@ -1,15 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class MenuButtons : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject _pauseMenu;
-    // Start is called before the first frame update
-  
-
-    // Update is called once per frame
+    public GameObject _settingsMenu;
+    public void ChangeScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
+    }
+    public void OpenSettings()
+    {
+        if(Setting.SettingsOpen)
+        {
+            Setting.SettingsOpen = false;
+            _settingsMenu.SetActive(false);
+            _pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Setting.SettingsOpen = true;
+            _settingsMenu.SetActive(true);
+            _pauseMenu.SetActive(false);
+            Time.timeScale = 0;
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
