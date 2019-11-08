@@ -16,12 +16,15 @@ using UnityEngine;
         //Reference Variable
         public PlayerHandler player;
         private CharacterController _charC;
-
+    public Collider capsule, sphere;
         private void Start()
         {
             _charC = GetComponent<CharacterController>();
+        //want to make it do the capsule turns into a sphere when you press crouch thus lowering the profile
+        //capsule.SetActive(true);
+        
+    }
 
-        }
         private void Update()
         {
             Move();
@@ -31,23 +34,24 @@ using UnityEngine;
         {
             if (_charC.isGrounded && !PlayerHandler.isDead)
             {
-                //set speed
-                if (Input.GetButton("Crouch"))
-                {
-                    moveSpeed = crouchSpeed;
-                    
-                }
-                else if (Input.GetButton("Sprint"))
-                {
-                    moveSpeed = runSpeed;
-                    
-                }
-                
-                else
-                {
-                    moveSpeed = walkSpeed;
-                    
-                }
+            //set speed
+            if (Input.GetButton("Crouch"))
+            {
+
+                moveSpeed = crouchSpeed;
+            }
+
+            else if (Input.GetButton("Sprint"))
+            {
+                moveSpeed = runSpeed;
+
+            }
+
+            else
+            {
+                moveSpeed = walkSpeed;
+
+            }
                 
                 _moveDir = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed);
                 if (Input.GetButton("Jump"))
