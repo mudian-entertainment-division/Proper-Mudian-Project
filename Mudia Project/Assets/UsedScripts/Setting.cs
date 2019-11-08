@@ -11,15 +11,15 @@ public class Setting : MonoBehaviour
     
     public AudioMixer audioMixer;
 
-    public Dropdown resolutionDropDown;
+    //public Dropdown resolutionDropDown;
     Resolution[] resolutions;
     // Start is called before the first frame update
     void Start()
     {
         resolutions = Screen.resolutions;
-        resolutionDropDown.ClearOptions();
+       // resolutionDropDown.ClearOptions();
         List<string> options = new List<string>();
-        int currentResolutionIndex = 0;
+        //int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
@@ -27,13 +27,13 @@ public class Setting : MonoBehaviour
 
             if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
-                currentResolutionIndex = 1;
+               // currentResolutionIndex = 1;
             }
 
         }
-        resolutionDropDown.AddOptions(options);
-        resolutionDropDown.value = currentResolutionIndex;
-        resolutionDropDown.RefreshShownValue();
+       // resolutionDropDown.AddOptions(options);
+        //resolutionDropDown.value = currentResolutionIndex;
+       // resolutionDropDown.RefreshShownValue();
         SettingsOpen = false;
      }
     public void SetVolume(float volume)

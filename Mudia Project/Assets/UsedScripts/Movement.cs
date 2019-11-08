@@ -1,8 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace RPG.Player
-{
+
     [AddComponentMenu("RPG/Player/Movement")]
     [RequireComponent(typeof(CharacterController))]
     public class Movement : MonoBehaviour
@@ -26,7 +25,7 @@ namespace RPG.Player
         private void Update()
         {
             Move();
-            PlayerHandler.curStamina += Time.deltaTime;
+            
         }
         private void Move()
         {
@@ -36,24 +35,18 @@ namespace RPG.Player
                 if (Input.GetButton("Crouch"))
                 {
                     moveSpeed = crouchSpeed;
-                    if (PlayerHandler.curStamina <= player.maxStamina)
-                    {
-                        PlayerHandler.curStamina += Time.deltaTime;
-                    }
+                    
                 }
-                else if (Input.GetButton("Sprint") && PlayerHandler.curStamina > 1)
+                else if (Input.GetButton("Sprint"))
                 {
                     moveSpeed = runSpeed;
-                    PlayerHandler.curStamina -= 2*Time.deltaTime;
+                    
                 }
                 
                 else
                 {
                     moveSpeed = walkSpeed;
-                    if (PlayerHandler.curStamina <= player.maxStamina)
-                    {
-                        PlayerHandler.curStamina += Time.deltaTime;
-                    }
+                    
                 }
                 
                 _moveDir = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed);
@@ -76,4 +69,4 @@ namespace RPG.Player
 
     }
 
-}
+
