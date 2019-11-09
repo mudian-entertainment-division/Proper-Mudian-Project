@@ -10,7 +10,7 @@ using UnityEngine;
         //value Variables
         public float moveSpeed;
         public float walkSpeed, runSpeed, crouchSpeed, jumpSpeed;
-        private float _gravity = 20;
+        public static float _gravity = 20;
         //Struct - Contains Multiple Variables (eg...3 floats)
         private Vector3 _moveDir;
         //Reference Variable
@@ -22,7 +22,7 @@ using UnityEngine;
             _charC = GetComponent<CharacterController>();
         //want to make it do the capsule turns into a sphere when you press crouch thus lowering the profile
         //capsule.SetActive(true);
-        
+        _gravity = 20;
     }
 
         private void Update()
@@ -63,10 +63,9 @@ using UnityEngine;
             {
                 _moveDir = Vector3.zero;
             }
-            //Regardless if we are grounded or not
-            //apply gravity
-            _moveDir.y -= _gravity * Time.deltaTime;
-            //apply movement
+        
+        _moveDir.y -= _gravity * Time.deltaTime;
+            
            
             _charC.Move(_moveDir * Time.deltaTime);
         }

@@ -11,9 +11,9 @@ public class PlayerHandler : MonoBehaviour
     public float maxHealth;
     
     public float curHealth, healRate;
-   
-    
-    
+
+    public GameObject m_FrontCheck;
+
     public Slider healthBar;
    
     [Header("Damage Effect Variables")]
@@ -124,20 +124,20 @@ public class PlayerHandler : MonoBehaviour
     {
         text.text = "But I'll give you another chance";
     }
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerEnter(Collider m_FrontCheck)
     {
-        if(other.gameObject.CompareTag("CheckPoint"))
+        if (m_FrontCheck.gameObject.CompareTag("Climb"))
         {
-            curCheckPoint = other.transform;
-           // saveAndLoad.Save();
-            healRate = 10;
+            Movement._gravity = 0;
         }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider m_FrontCheck)
     {
-        if (other.gameObject.CompareTag("CheckPoint"))
+        
+        if (m_FrontCheck.gameObject.CompareTag("Climb"))
         {
-            healRate = 0;
+            Movement._gravity = 20;
         }
     }
     public void DamagePlayer(float damage)
