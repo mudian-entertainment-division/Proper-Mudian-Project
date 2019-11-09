@@ -8,7 +8,7 @@ using UnityEngine;
     {
         [Header("Speed Vars")]
         //value Variables
-        public float moveSpeed;
+        public float moveSpeed, noise;
         public float walkSpeed, runSpeed, crouchSpeed, jumpSpeed;
         public static float _gravity = 20;
         //Struct - Contains Multiple Variables (eg...3 floats)
@@ -23,6 +23,7 @@ using UnityEngine;
         //want to make it do the capsule turns into a sphere when you press crouch thus lowering the profile
         //capsule.SetActive(true);
         _gravity = 20;
+        noise = 6f;
     }
 
         private void Update()
@@ -37,27 +38,28 @@ using UnityEngine;
             //set speed
             if (Input.GetButton("Crouch"))
             {
-
+                noise = 0f;
                 moveSpeed = crouchSpeed;
             }
 
             else if (Input.GetButton("Sprint"))
             {
                 moveSpeed = runSpeed;
-
+                noise = 12f;
             }
 
             else
             {
                 moveSpeed = walkSpeed;
-
+                noise = 6f;
             }
                 
                 _moveDir = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed);
                 if (Input.GetButton("Jump"))
                 {
                     _moveDir.y = jumpSpeed;
-                }
+                noise = 18f;
+            }
             }
             if(PlayerHandler.isDead)
             {
