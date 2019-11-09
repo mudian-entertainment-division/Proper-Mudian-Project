@@ -18,8 +18,10 @@ public class EnemyAI : MonoBehaviour
     public float turnSpeed;
     public float angle;
     public Movement movement;
-  
-    
+    public Transform waypointParent;
+    private Transform[] points;
+    public float waypointDistance;
+    public int currentWayPoint = 1;
     void Start()
     {
         //sets the conditions at the start
@@ -61,9 +63,26 @@ public class EnemyAI : MonoBehaviour
 
             else
             {
-              
-                //  myAI.Patrol();
-                //timeTillNextFire = 0;
+                if (points.Length == 0)
+                    return;
+
+                // Set the agent to go to the currently selected destination.
+                agent.destination = points[currentWayPoint].position;
+                //transform.position = Vector3.MoveTowards(transform.position, points[currentWayPoint].position, 1f);
+                if (transform.position.x == agent.destination.x && transform.position.z == agent.destination.z)
+                {
+                    if (currentWayPoint < points.Length - 1)
+                    {
+                        currentWayPoint++;
+                    }
+                    else
+                    {
+                        //resets the waypoints to the begining
+                        currentWayPoint = 0;
+                    }
+
+                }
+
             }
         }
 

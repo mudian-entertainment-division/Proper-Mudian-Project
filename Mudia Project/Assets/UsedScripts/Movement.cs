@@ -1,14 +1,14 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 
-
-    [AddComponentMenu("RPG/Player/Movement")]
+[AddComponentMenu("RPG/Player/Movement")]
     [RequireComponent(typeof(CharacterController))]
     public class Movement : MonoBehaviour
     {
         [Header("Speed Vars")]
         //value Variables
-        public float moveSpeed, noise;
+        public float moveSpeed, noise, maxNoise;
         public float walkSpeed, runSpeed, crouchSpeed, jumpSpeed;
         public static float _gravity = 20;
         //Struct - Contains Multiple Variables (eg...3 floats)
@@ -17,21 +17,32 @@ using UnityEngine;
         public PlayerHandler player;
         private CharacterController _charC;
     public Collider capsule, sphere;
-        private void Start()
+    public Slider noiseBar;
+    private void Start()
         {
             _charC = GetComponent<CharacterController>();
         //want to make it do the capsule turns into a sphere when you press crouch thus lowering the profile
         //capsule.SetActive(true);
         _gravity = 20;
         noise = 6f;
+        maxNoise = 24f;
     }
 
         private void Update()
         {
             Move();
-            
+        if (noiseBar.value != Mathf.Clamp01(noise / maxNoise))
+        {
+            GainNoise();
         }
-        private void Move()
+    }
+    void GainNoise()
+    {
+        noise = Mathf.Clamp(noise, 0, maxNoise);
+        noiseBar.value = Mathf.Clamp01(noise / maxNoise);
+
+    }
+    private void Move()
         {
             if (_charC.isGrounded && !PlayerHandler.isDead)
             {

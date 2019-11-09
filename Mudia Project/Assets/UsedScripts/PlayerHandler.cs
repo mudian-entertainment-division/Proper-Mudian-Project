@@ -15,7 +15,7 @@ public class PlayerHandler : MonoBehaviour
     public GameObject m_FrontCheck;
 
     public Slider healthBar;
-   
+    
     [Header("Damage Effect Variables")]
     
     public GameObject deathImage;
@@ -57,7 +57,7 @@ public class PlayerHandler : MonoBehaviour
         {
             LoseHealth();
         }
-       
+      
         if (Input.GetKeyDown(KeyCode.X))
         {
             
