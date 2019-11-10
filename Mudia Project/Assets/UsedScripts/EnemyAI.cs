@@ -13,15 +13,26 @@ public class EnemyAI : MonoBehaviour
    
     //gives distances for how far away the player will be when they switch behaviour
     public float dist, sightDist;
+    
     public GameObject self;
     //public GameObject playerShadow;
     public float turnSpeed;
-    public float angle;
+    public float sightAngle;
     public Movement movement;
     public Transform waypointParent;
     private Transform[] points;
     public float waypointDistance;
     public int currentWayPoint = 1;
+    public Rigidbody rigid;
+
+    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    {
+        if(!angleIsGlobal)
+        {
+            angleInDegrees += transform.eulerAngles.y; 
+        }
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
     void Start()
     {
         //sets the conditions at the start
@@ -33,6 +44,7 @@ public class EnemyAI : MonoBehaviour
     }
     void Update()
     {
+        sightDist = 100f;
         noiseRange = movement.noise * sense;
         //kills the enemy when they lose all their health
         if (curHealth <= 0)
