@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     //gives distances for how far away the player will be when they switch behaviour
     public float dist, sightDist;
     public GameObject self;
-    
+    //public GameObject playerShadow;
     public float turnSpeed;
     public float angle;
     public Movement movement;
@@ -27,8 +27,9 @@ public class EnemyAI : MonoBehaviour
         //sets the conditions at the start
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = self.GetComponent<NavMeshAgent>();
+        points = waypointParent.GetComponentsInChildren<Transform>();
 
-       
+
     }
     void Update()
     {
