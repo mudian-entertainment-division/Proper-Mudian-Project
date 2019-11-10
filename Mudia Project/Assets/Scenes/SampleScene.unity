@@ -3487,5 +3487,10 @@ PrefabInstance:
       propertyPath: movement
       value: 
       objectReference: {fileID: 337299953}
+    - target: {fileID: 2778374778997485824, guid: f71a0d0e888d64f449fb1361dc973dbc,
+        type: 3}
+      propertyPath: sightAngle
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f71a0d0e888d64f449fb1361dc973dbc, type: 3}

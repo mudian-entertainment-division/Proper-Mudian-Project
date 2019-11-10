@@ -24,7 +24,8 @@ public class EnemyAI : MonoBehaviour
     public float waypointDistance;
     public int currentWayPoint = 1;
     public Rigidbody rigid;
-
+    public LayerMask targetMask;
+    public LayerMask obstacleMask;
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if(!angleIsGlobal)
@@ -39,12 +40,16 @@ public class EnemyAI : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = self.GetComponent<NavMeshAgent>();
         points = waypointParent.GetComponentsInChildren<Transform>();
-
-
+        sightDist = 100f;
+        sightAngle = 90f;
     }
     void Update()
     {
-        sightDist = 100f;
+        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, sightDist, targetMask);
+        for (int i = 0; i < targetsInViewRadius.Length; i++)
+        {
+            Transform target
+        }
         noiseRange = movement.noise * sense;
         //kills the enemy when they lose all their health
         if (curHealth <= 0)
