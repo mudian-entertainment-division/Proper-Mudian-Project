@@ -42,14 +42,28 @@ public class EnemyAI : MonoBehaviour
         points = waypointParent.GetComponentsInChildren<Transform>();
         sightDist = 100f;
         sightAngle = 90f;
+        
     }
     void Update()
     {
+        //RaycastHit hitInfo = Physics.Raycast(transform.position, transform.right, sightDist);
+        /*/
+        if (hitInfo.collider != null)
+        {
+            if(hitInfo.collider.CompareTag("Player"))
+            {
+                agent.destination = target.position;
+            }
+            
+        }
+        /*/
+        /*/
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, sightDist, targetMask);
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             Transform target
         }
+        /*/
         noiseRange = movement.noise * sense;
         //kills the enemy when they lose all their health
         if (curHealth <= 0)
